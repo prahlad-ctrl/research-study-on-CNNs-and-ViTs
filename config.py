@@ -15,6 +15,9 @@ class Config:
     weight_decay = 0.05
     optimizer = "AdamW"
     
-    # will add the num of images,res files, etc shortly
+    data_size = [1000, 5000, 10000, 50000, 100000]
+    resolution = [64, 128, 256, 512]
+    
+    #models
     
 config = Config()
