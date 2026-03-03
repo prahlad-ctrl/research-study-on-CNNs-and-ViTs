@@ -18,6 +18,7 @@ class Config:
     data_size = [1000, 5000, 10000, 50000, 100000]
     resolution = [64, 128, 256, 512]
     
-    #models
+    cnn_models = ['resnet18', 'resnet50']
+    vit_models = ['vit_tiny', 'vit_small']
     
 config = Config()
