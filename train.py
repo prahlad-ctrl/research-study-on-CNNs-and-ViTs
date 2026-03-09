@@ -4,7 +4,7 @@ from tqdm import tqdm
 
 from config import config
 from dataset import build_dataloaders
-from models import model
+from models import sel_model
 from metrics import TrackMetrics
 
 import argparse
@@ -59,10 +59,10 @@ def main():
         img_size=args.img_size
     )
 
-    model = model(
-        model_name=args.model, 
-        num_classes=10, 
-        pretrained=args.pretrained, 
+    model = sel_model(
+        model_name=args.model,
+        num_classes=10,
+        pretrained=args.pretrained,
         img_size=args.img_size
     )
     model = model.to(config.device)
