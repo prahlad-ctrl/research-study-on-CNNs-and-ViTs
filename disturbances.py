@@ -26,7 +26,7 @@ class PatchShuffle:
         return shuffled_img
 
 # evaluating under disturbances like noise, blur, etc
-def get_transforms(img_size, severity = 1):
+def get_dist_transforms(img_size, severity = 1):
     base_resize = transforms.Compose([transforms.Resize((img_size, img_size)),
                                       transforms.ToTensor()])
     dist = {'clean': transforms.Compose([base_resize,
