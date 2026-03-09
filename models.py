@@ -2,7 +2,7 @@ import timm
 import torch
 from torch import nn
 
-def model(model_name, num_classes=10, pretrained= False, img_size = 64):
+def sel_model(model_name, num_classes=10, pretrained= False, img_size = 64):
     if model_name == 'resnet18':
         model = timm.create_model('resnet18', pretrained=pretrained, num_classes=num_classes)
     elif model_name == 'resnet50':
