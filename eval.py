@@ -9,8 +9,8 @@ import os
 from tqdm import tqdm
 
 from config import config
-from models import model
-from disturbances import get_transforms
+from models import sel_model
+from disturbances import get_dist_transforms
 from metrics import TrackMetrics
 
 def eval_robustness(model, dataloader, criterion, device):
@@ -31,13 +31,15 @@ def main():
     parser.add_argument('--model', type=str, required=True, choices=['resnet18', 'resnet50', 'vit_tiny', 'vit_small'])
     parser.add_argument('--weights', type=str, required=True)
     parser.add_argument('--img_size', type=int, default=64)
-    args = parser.parse_args()
     
-    model = model(model_name=args.model, num_classes=10, pretrained=False, img_size=args.img_size)
+    # can keep changing this for the model you trained. argparse is a bit scrappy but it works for now, will make it better in the future
+    args = parser.parse_args(args=['--model', 'resnet18', '--weights', 'trained_mods/resnet18.pth'])
+    
+    model = sel_model(model_name=args.model, num_classes=10, pretrained=False, img_size=args.img_size)
     model.load_state_dict(torch.load(args.weights, map_location=config.device))
     model = model.to(config.device)
     criterion = nn.CrossEntropyLoss()
-    disturbance = get_transforms(img_size=args.img_size, severity=2)
+    disturbance = get_dist_transforms(img_size=args.img_size, severity=2)
     results = {
         "model": args.model,
         "resolution": args.img_size,
